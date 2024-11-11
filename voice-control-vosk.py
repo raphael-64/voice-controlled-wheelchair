@@ -91,6 +91,23 @@ def go_forward():
     update_speed()
     print("Command: Go Forward")
 
+def go_backward():
+    GPIO.output(PIN1_A, GPIO.LOW)
+    GPIO.output(PIN2_A, GPIO.HIGH)
+    
+    GPIO.output(PIN1_B, GPIO.LOW)
+    GPIO.output(PIN2_B, GPIO.HIGH)
+    
+    GPIO.output(PIN1_C, GPIO.LOW)
+    GPIO.output(PIN2_C, GPIO.HIGH)
+    
+    GPIO.output(PIN1_D, GPIO.LOW)
+    GPIO.output(PIN2_D, GPIO.HIGH)
+    
+    update_speed()
+    print("Command: Go Backward")
+    
+
 def stop_motors():
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.LOW)
@@ -166,13 +183,12 @@ try:
         if recognizer.AcceptWaveform(data):
             result = recognizer.Result()
             text = eval(result)["text"]
-            init()
 
             if "go" in text:
-                # activate GPIO for forward motion
                 go_forward()
+            elif "back" in text:
+                go_backward()
             elif "stop" in text:
-                # GPIO for stop
                 stop_motors()
             elif "turn left" in text:
                 turn_left()
