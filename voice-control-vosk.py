@@ -26,7 +26,7 @@ GPIO.setup(PIN2_B, GPIO.OUT)
 GPIO.setup(ENA_B, GPIO.OUT)
 
 
-model = Model("/Users/raphael/Documents/Github/voice-controlled-wheelchair/vosk-model")  #just my laptop, add the right path 
+model = Model("/Users/raphael/Documents/Coding/SE101/voice-controlled-wheelchair/vosk-model")  #just my laptop, add the right path 
 recognizer = KaldiRecognizer(model, 16000)
 
 audio = pyaudio.PyAudio()
