@@ -14,8 +14,7 @@ def go_forward():
     os.system("python forward.py")
 
 def go_backward():
-    os.system("python backward.py")
-    
+    os.system("python backward.py")  
 
 def stop_motors():
     os.system("python stop.py")
