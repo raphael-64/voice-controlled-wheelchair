@@ -50,7 +50,7 @@ try:
          GPIO.output(in4,GPIO.HIGH)
          GPIO.output(in3,GPIO.LOW)
 
-         print("Forward")
+         print("Right")
 
       elif user_input == 's':
          GPIO.output(in1,GPIO.LOW)
@@ -58,23 +58,23 @@ try:
 
          GPIO.output(in4,GPIO.LOW)
          GPIO.output(in3,GPIO.HIGH)
-         print('Back')
+         print('Left')
 
       elif user_input == 'd':
          GPIO.output(in1,GPIO.LOW)
          GPIO.output(in2,GPIO.HIGH)
 
-         GPIO.output(in4,GPIO.LOW)
+         GPIO.output(in4,GPIO.HIGH)
          GPIO.output(in3,GPIO.LOW)
-         print('Right')
+         print('Backward')
 
       elif user_input == 'a':
          GPIO.output(in1,GPIO.HIGH)
          GPIO.output(in2,GPIO.LOW)
 
-         GPIO.output(in4,GPIO.LOW)
+         GPIO.output(in4,GPIO.HIGH)
          GPIO.output(in3,GPIO.LOW)
-         print('Left')
+         print('Forward')
 
       # Press 'c' to exit the script
       elif user_input == 'c':
