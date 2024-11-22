@@ -61,7 +61,7 @@ def turn_right():
 
 try:
     while True:
-        data = stream.read(4096)
+        data = stream.read(4096)-
         if recognizer.AcceptWaveform(data):
             result = recognizer.Result()
             text = eval(result)["text"]
