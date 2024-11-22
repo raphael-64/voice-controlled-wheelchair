@@ -72,8 +72,8 @@ try:
          GPIO.output(in1,GPIO.HIGH)
          GPIO.output(in2,GPIO.LOW)
 
-         GPIO.output(in4,GPIO.HIGH)
-         GPIO.output(in3,GPIO.LOW)
+         GPIO.output(in4,GPIO.LOW)
+         GPIO.output(in3,GPIO.HIGH)
          print('Forward')
 
       # Press 'c' to exit the script
