@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-from time import sleep
 
 GPIO.setmode(GPIO.BCM)  # Use Broadcom pin-numbering scheme
 
@@ -39,15 +38,3 @@ GPIO.output(PIN2_B, GPIO.LOW)
 pwm_a.ChangeDutyCycle(50)
 pwm_b.ChangeDutyCycle(50)
 
-sleep(2)
-
-print ("Stopping motor")
-GPIO.output(PIN1_A, GPIO.LOW)
-GPIO.output(PIN2_A, GPIO.LOW)
-    
-GPIO.output(PIN1_B, GPIO.LOW)
-GPIO.output(PIN2_B, GPIO.LOW)
-    
-pwm_a.ChangeDutyCycle(0)
-pwm_b.ChangeDutyCycle(0)
-GPIO.cleanup()
