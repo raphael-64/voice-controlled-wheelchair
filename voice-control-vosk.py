@@ -76,10 +76,6 @@ try:
                 turn_left()
             elif "turn right" in text:
                 turn_right()
-            elif "slow down" in text:
-                slow_down()
-            elif "speed up" in text:
-                speed_up()
 except KeyboardInterrupt:
     print("\nProgram terminated by user")
 
