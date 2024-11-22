@@ -10,7 +10,7 @@ en_a = 23
 # Left Motor
 in3 = 29
 in4 = 28
-en_b = 27
+en_b = 26
 
 
 GPIO.setmode(GPIO.BCM)
