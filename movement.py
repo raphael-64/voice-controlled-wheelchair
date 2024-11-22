@@ -4,16 +4,16 @@ from time import sleep
 GPIO.setwarnings(False)
 
 # Right Motor
-in1 = 21
-in2 = 22
-en_a = 23
+in1 = 29
+in2 = 31
+en_a = 33
 # Left Motor
-in3 = 29
-in4 = 28
-en_b = 26
+in3 = 40
+in4 = 38
+en_b = 32
 
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 GPIO.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
 GPIO.setup(en_a,GPIO.OUT)
