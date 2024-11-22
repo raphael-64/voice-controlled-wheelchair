@@ -2,6 +2,7 @@ from vosk import Model, KaldiRecognizer
 import pyaudio
 import RPi.GPIO as GPIO
 import time
+import os
 
 # Left
 PIN1_A = 22 #In1 A
@@ -41,80 +42,22 @@ pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 pwm_a.start(0)
 pwm_b.start(0)
 
-
-speed_a = 50  # Motor A speed
-speed_b = 50  # Motor B speed
-
-def update_speed():
-    pwm_a.ChangeDutyCycle(speed_a)
-    pwm_b.ChangeDutyCycle(speed_b)
-
-
 def go_forward():
-    GPIO.output(PIN1_A, GPIO.HIGH)
-    GPIO.output(PIN2_A, GPIO.LOW)
-    
-    GPIO.output(PIN1_B, GPIO.HIGH)
-    GPIO.output(PIN2_B, GPIO.LOW)
-    
-    update_speed()
-    print("Command: Go Forward")
+    os.system("python forward.py")
 
 def go_backward():
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.HIGH)
-    
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.HIGH)
-    
-    update_speed()
-    print("Command: Go Backward")
+    os.system("python backward.py")
     
 
 def stop_motors():
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.LOW)
-    
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.LOW)
-    
-    pwm_a.ChangeDutyCycle(0)
-    pwm_b.ChangeDutyCycle(0)
-    print("Command: Stop Motors")
+    os.system("python stop.py")
 
 def turn_left():
-    GPIO.output(PIN1_A, GPIO.HIGH)
-    GPIO.output(PIN2_A, GPIO.LOW)
-    
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.HIGH)
-    
-    update_speed()
-    print("Command: Turn Left")
+    os.system("python left.py")
 
 def turn_right():
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.HIGH)
-    
-    GPIO.output(PIN1_B, GPIO.HIGH)
-    GPIO.output(PIN2_B, GPIO.LOW)
-    
-    update_speed()
-    print("Command: Turn Right")
+    os.system("python right.py")
 
-def slow_down():
-    global speed_a, speed_b
-    # Decrease speed by 10%, ensuring it doesn't go below 0%
-    speed_a = max(speed_a - 10, 0)
-    speed_b = max(speed_b - 10, 0)
-    update_speed()
-
-def speed_up():
-    global speed_a, speed_b
-    # Increase speed by 10%, ensuring it doesn't exceed 100%
-    speed_a = min(speed_a + 10, 100)
-    speed_b = min(speed_b + 10, 100)
-    update_speed()
 
 try:
     while True:
