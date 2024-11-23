@@ -1,5 +1,6 @@
 import os
 import RPi.GPIO as GPIO
+import time
 
 # Left
 PIN1_A = 29 #In1 A
@@ -39,27 +40,40 @@ if input == "go":
     
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.HIGH)
+    time.sleep(5)
+
 elif input == "back":
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
     
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
+    time.sleep(5)
+
 elif input == "left":  
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
         
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.HIGH)
+    time.sleep(5)
+
 elif input == "right":
     GPIO.output(PIN1_A, GPIO.HIGH)
     GPIO.output(PIN2_A, GPIO.LOW)
    
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
+    time.sleep(5)
+
 elif input == "stop":
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.LOW)
         
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.LOW)
+    time.sleep(5)
+
+pwm_a.stop()
+pwm_b.stop()
+GPIO.cleanup()
