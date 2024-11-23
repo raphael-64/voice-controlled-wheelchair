@@ -1,16 +1,14 @@
 import os
 
-with open("output.txt","r") as file:
-    string = file.readline().strip()
+input = open("output.txt").read()
 
-if string == "go":
-    os.system("python forward.py")
-elif string == "back":
-    os.system("python backward.py")
-elif string == "left":
-    os.system("python left.py")
-elif string == "right":
-    os.system("python right.py")
-elif string == "stop":
-    os.system("python stop.py")
-
+if input == "go":
+    os.system("python forward.py| nc "+IPAdd+" 1200")
+elif input == "back":
+    os.system("python backward.py| nc "+IPAdd+" 1200")
+elif input == "left":
+    os.system("python left.py| nc "+IPAdd+" 1200")
+elif input == "right":
+    os.system("python right.py| nc "+IPAdd+" 1200")
+elif input == "stop":
+    os.system("python stop.py| nc "+IPAdd+" 1200")
