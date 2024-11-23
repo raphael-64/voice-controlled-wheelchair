@@ -29,26 +29,20 @@ try:
             text = eval(result)["text"]
 
             if "go" in text:
-                os.system("python3 ./commands/go.py| nc "+IPAdd+" 1200")
+                os.system("python3 forward.py| nc "+IPAdd+" 1200")
                 print("go")
             elif "back" in text:
-                os.system("python3 ./commands/back.py | nc "+IPAdd+" 1200")
+                os.system("python3 backward.py | nc "+IPAdd+" 1200")
                 print("back")
             elif "stop" in text:
-                os.system("python3 ./commands/stop.py | nc "+IPAdd+" 1200")
+                os.system("python3 stop.py | nc "+IPAdd+" 1200")
                 print("stop")
             elif "turn left" in text:
-                os.system("python3 ./commands/left.py | nc "+IPAdd+" 1200")
+                os.system("python3 left.py | nc "+IPAdd+" 1200")
                 print("left")
             elif "turn right" in text:
-                os.system("python3 ./commands/right.py| nc "+IPAdd+" 1200")
-                print("turn right")
-            elif "slow down" in text:
-                os.system("python3 ./commands/down.py | nc "+IPAdd+" 1200")
-                print("down")
-            elif "speed up" in text:
-                os.system("python3 ./commands/up.py| nc "+IPAdd+" 1200")
-                print("up")
+                os.system("python3 right.py| nc "+IPAdd+" 1200")
+                print("right")
 except KeyboardInterrupt:
     print("\nProgram terminated by user")
 

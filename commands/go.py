@@ -1,5 +1,5 @@
 import time 
 
-print ("go")
+print ("g")
 
     
