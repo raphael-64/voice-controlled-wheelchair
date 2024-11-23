@@ -31,7 +31,7 @@ pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 pwm_a.start(100)
 pwm_b.start(100)
 
-input = open("/home/macrohard/Deesktop/output.txt").read()
+input = open("output.txt").read()
 
 if input == "go":
     GPIO.output(PIN1_A, GPIO.HIGH)
