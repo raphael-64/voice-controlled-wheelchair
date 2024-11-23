@@ -33,7 +33,7 @@ pwm_a.start(75)
 pwm_b.start(75)
 
 input = open("output.txt").read()
-print("Input: " + input)
+print("Input:" + input + "n")
 
 if input == "go":
     print ("go")
