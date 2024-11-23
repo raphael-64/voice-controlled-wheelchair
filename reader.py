@@ -41,7 +41,6 @@ if input == "go":
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.HIGH)
     time.sleep(5)
-
 elif input == "back":
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
@@ -49,7 +48,6 @@ elif input == "back":
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
     time.sleep(5)
-
 elif input == "left":  
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
@@ -57,7 +55,6 @@ elif input == "left":
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.HIGH)
     time.sleep(5)
-
 elif input == "right":
     GPIO.output(PIN1_A, GPIO.HIGH)
     GPIO.output(PIN2_A, GPIO.LOW)
@@ -65,7 +62,6 @@ elif input == "right":
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
     time.sleep(5)
-
 elif input == "stop":
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.LOW)
