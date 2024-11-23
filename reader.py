@@ -29,53 +29,69 @@ GPIO.setup(ENA_B, GPIO.OUT)
 pwm_a = GPIO.PWM(ENA_A, 100)  # Motor A PWM
 pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 
-pwm_a.start(100)
-pwm_b.start(100)
+pwm_a.start(0)
+pwm_b.start(0)
+
+speed_a = 50  # Motor A speed
+speed_b = 50  # Motor B speed
 
 input = open("output.txt").read()
 print("Input:" + input + "n")
 
+def update_speed():
+    pwm_a.ChangeDutyCycle(speed_a)
+    pwm_b.ChangeDutyCycle(speed_b)
+
 if input == "go\n":
-    print ("go")
     GPIO.output(PIN1_A, GPIO.HIGH)
     GPIO.output(PIN2_A, GPIO.LOW)
     
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
-    time.sleep(5)
+    update_speed()
+
 elif input == "back\n":
-    print ("back")
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
     
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.HIGH)
-    time.sleep(5)
+    update_speed()
+
 elif input == "left\n": 
-    print ("left") 
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
         
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
-    time.sleep(5)
+    update_speed()
+
 elif input == "right\n":
-    print ("right")
     GPIO.output(PIN1_A, GPIO.HIGH)
     GPIO.output(PIN2_A, GPIO.LOW)
    
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.HIGH)
-    time.sleep(5)
+    update_speed()
+
+elif input == "down":
+    speed_a = max(speed_a - 10, 0)
+    speed_b = max(speed_b - 10, 0)
+
+elif input == "up":
+    speed_a = min(speed_a + 10, 100)
+    speed_b = min(speed_b + 10, 100)
+
 elif input == "stop\n":
-    print ("stop")
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.LOW)
         
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.LOW)
-    time.sleep(5)
+    pwm_a.ChangeDutyCycle(0)
+    pwm_b.ChangeDutyCycle(0)
+    pwm_a.stop()
+    pwm_b.stop()
+    GPIO.cleanup()
 
-pwm_a.stop()
-pwm_b.stop()
-GPIO.cleanup()
+
