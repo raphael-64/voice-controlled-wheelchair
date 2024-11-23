@@ -2,6 +2,7 @@ from vosk import Model, KaldiRecognizer
 import pyaudio
 import time
 import os
+import RPi.GPIO as GPIO
 
 import sys
 import queue
