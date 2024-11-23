@@ -40,32 +40,32 @@ if input == "go\n":
     GPIO.output(PIN1_A, GPIO.HIGH)
     GPIO.output(PIN2_A, GPIO.LOW)
     
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.HIGH)
+    GPIO.output(PIN1_B, GPIO.HIGH)
+    GPIO.output(PIN2_B, GPIO.LOW)
     time.sleep(5)
 elif input == "back\n":
     print ("back")
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
     
-    GPIO.output(PIN1_B, GPIO.HIGH)
-    GPIO.output(PIN2_B, GPIO.LOW)
+    GPIO.output(PIN1_B, GPIO.LOW)
+    GPIO.output(PIN2_B, GPIO.HIGH)
     time.sleep(5)
 elif input == "left\n": 
     print ("left") 
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
         
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.HIGH)
+    GPIO.output(PIN1_B, GPIO.HIGH)
+    GPIO.output(PIN2_B, GPIO.LOW)
     time.sleep(5)
 elif input == "right\n":
     print ("right")
     GPIO.output(PIN1_A, GPIO.HIGH)
     GPIO.output(PIN2_A, GPIO.LOW)
    
-    GPIO.output(PIN1_B, GPIO.HIGH)
-    GPIO.output(PIN2_B, GPIO.LOW)
+    GPIO.output(PIN1_B, GPIO.LOW)
+    GPIO.output(PIN2_B, GPIO.HIGH)
     time.sleep(5)
 elif input == "stop\n":
     print ("stop")
