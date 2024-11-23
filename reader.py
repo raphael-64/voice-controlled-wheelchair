@@ -29,8 +29,8 @@ GPIO.setup(ENA_B, GPIO.OUT)
 pwm_a = GPIO.PWM(ENA_A, 100)  # Motor A PWM
 pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 
-pwm_a.start(75)
-pwm_b.start(75)
+pwm_a.start(150)
+pwm_b.start(150)
 
 input = open("output.txt").read()
 print("Input:" + input + "n")
@@ -51,7 +51,7 @@ elif input == "back\n":
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
     time.sleep(5)
-elif input == "left": 
+elif input == "left\n": 
     print ("left") 
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.HIGH)
@@ -59,7 +59,7 @@ elif input == "left":
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.HIGH)
     time.sleep(5)
-elif input == "right":
+elif input == "right\n":
     print ("right")
     GPIO.output(PIN1_A, GPIO.HIGH)
     GPIO.output(PIN2_A, GPIO.LOW)
@@ -67,7 +67,7 @@ elif input == "right":
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
     time.sleep(5)
-elif input == "stop":
+elif input == "stop\n":
     print ("stop")
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.LOW)
