@@ -2,6 +2,8 @@ import os
 import RPi.GPIO as GPIO
 import time
 
+print("run")
+
 # Left
 PIN1_A = 29 #In1 A
 PIN2_A = 31 #in2 A
