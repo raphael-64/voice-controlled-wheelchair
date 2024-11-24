@@ -15,20 +15,15 @@ ENA_B = 32   # PWM for Motor B
 GPIO.setmode(GPIO.BOARD)  # Use Broadcom pin-numbering scheme
 
 # Setup Motor A pins
-if GPIO.gpio_function(PIN1_A) != GPIO.OUT:
-    GPIO.setup(PIN1_A, GPIO.OUT)
-if GPIO.gpio_function(PIN2_A) != GPIO.OUT:
-    GPIO.setup(PIN2_A, GPIO.OUT)
-if GPIO.gpio_function(ENA_A) != GPIO.OUT:
-    GPIO.setup(ENA_A, GPIO.OUT)
+GPIO.setup(PIN1_A, GPIO.OUT)
+GPIO.setup(PIN2_A, GPIO.OUT)
+GPIO.setup(ENA_A, GPIO.OUT)
 
 # Setup Motor B pins
-if GPIO.gpio_function(PIN1_B) != GPIO.OUT:
-    GPIO.setup(PIN1_B, GPIO.OUT)
-if GPIO.gpio_function(PIN2_B) != GPIO.OUT:
-    GPIO.setup(PIN2_B, GPIO.OUT)
-if GPIO.gpio_function(ENA_B) != GPIO.OUT:
-    GPIO.setup(ENA_B, GPIO.OUT)
+
+GPIO.setup(PIN1_B, GPIO.OUT)
+GPIO.setup(PIN2_B, GPIO.OUT)
+GPIO.setup(ENA_B, GPIO.OUT)
 
 
 # Initialize PWM on ENA and ENB pins at 100Hz
@@ -68,6 +63,7 @@ elif input == "right\n":
    
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.HIGH)
+
 
 elif input == "stop\n":
     GPIO.output(PIN1_A, GPIO.LOW)
