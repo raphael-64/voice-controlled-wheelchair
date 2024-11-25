@@ -32,49 +32,66 @@ pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 pwm_a.start(100)
 pwm_b.start(100)
 
-input = open("output.txt").read()
-print("Input:" + input)
 
-if input == "go\n":    
-    GPIO.output(PIN1_A, GPIO.HIGH)
-    GPIO.output(PIN2_A, GPIO.LOW)
-    
-    GPIO.output(PIN1_B, GPIO.HIGH)
-    GPIO.output(PIN2_B, GPIO.LOW)
-    time.sleep(2)
-    print("go")
+try:
+    while(True):
+        input = open("output.txt").read()
+        print("Input:" + input)
+        if input == "go\n":   
+            pwm_a.start(100)
+            pwm_b.start(100)
+            GPIO.output(PIN1_A, GPIO.HIGH)
+            GPIO.output(PIN2_A, GPIO.LOW)
+            
+            GPIO.output(PIN1_B, GPIO.HIGH)
+            GPIO.output(PIN2_B, GPIO.LOW)
+            time.sleep(2)
+            print("go")
 
-elif input == "back\n":
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.HIGH)
-    
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.HIGH)
+        elif input == "back\n":
+            pwm_a.start(100)
+            pwm_b.start(100)
 
-elif input == "left\n": 
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.HIGH)
+            GPIO.output(PIN1_A, GPIO.LOW)
+            GPIO.output(PIN2_A, GPIO.HIGH)
+            
+            GPIO.output(PIN1_B, GPIO.LOW)
+            GPIO.output(PIN2_B, GPIO.HIGH)
+
+        elif input == "left\n": 
+            pwm_a.start(100)
+            pwm_b.start(100)
+
+            GPIO.output(PIN1_A, GPIO.LOW)
+            GPIO.output(PIN2_A, GPIO.HIGH)
+                
+            GPIO.output(PIN1_B, GPIO.HIGH)
+            GPIO.output(PIN2_B, GPIO.LOW)
+            time.sleep(2)
+
+        elif input == "right\n":
+            pwm_a.start(100)
+            pwm_b.start(100)
+
+            GPIO.output(PIN1_A, GPIO.HIGH)
+            GPIO.output(PIN2_A, GPIO.LOW)
         
-    GPIO.output(PIN1_B, GPIO.HIGH)
-    GPIO.output(PIN2_B, GPIO.LOW)
+            GPIO.output(PIN1_B, GPIO.LOW)
+            GPIO.output(PIN2_B, GPIO.HIGH)
+            time.sleep(2)
 
-elif input == "right\n":
-    GPIO.output(PIN1_A, GPIO.HIGH)
-    GPIO.output(PIN2_A, GPIO.LOW)
-   
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.HIGH)
+        elif input == "stop\n":
+            GPIO.output(PIN1_A, GPIO.LOW)
+            GPIO.output(PIN2_A, GPIO.LOW)
+                
+            GPIO.output(PIN1_B, GPIO.LOW)
+            GPIO.output(PIN2_B, GPIO.LOW)
+            pwm_a.ChangeDutyCycle(0)
+            pwm_b.ChangeDutyCycle(0)
+            pwm_a.stop()
+            pwm_b.stop()
+            
 
-elif input == "stop\n":
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.LOW)
-        
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.LOW)
-    pwm_a.ChangeDutyCycle(0)
-    pwm_b.ChangeDutyCycle(0)
-    pwm_a.stop()
-    pwm_b.stop()
+except Exception as e:
+    print(f"An error occurred: {e}")
     GPIO.cleanup()
-
-
