@@ -73,10 +73,11 @@ elif input == "stop\n":
         
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.LOW)
-    pwm_a.ChangeDutyCycle(0)
-    pwm_b.ChangeDutyCycle(0)
-    pwm_a.stop()
-    pwm_b.stop()
-    GPIO.cleanup()
+   
+pwm_a.ChangeDutyCycle(0)
+pwm_b.ChangeDutyCycle(0)
+pwm_a.stop()
+pwm_b.stop()
+GPIO.cleanup()
 
 
