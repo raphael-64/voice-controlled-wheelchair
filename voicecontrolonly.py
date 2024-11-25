@@ -49,6 +49,9 @@ try:
             elif "speed up" in text:
                 os.system("python3 ./commands/up.py| nc "+IPAdd+" 1200")
                 print("up")
+            elif "destroy" in text:
+                os.system("python3 ./commands/destroy.py | nc "+IPAdd+" 1200")
+                print("destroy")
 except KeyboardInterrupt:
     print("\nProgram terminated by user")
 
