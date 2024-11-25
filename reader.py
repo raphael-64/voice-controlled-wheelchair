@@ -35,12 +35,13 @@ pwm_b.start(100)
 input = open("output.txt").read()
 print("Input:" + input + "n")
 
-if input == "go\n":
+if input == "go\n":    
     GPIO.output(PIN1_A, GPIO.HIGH)
     GPIO.output(PIN2_A, GPIO.LOW)
     
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
+    print("go")
 
 elif input == "back\n":
     GPIO.output(PIN1_A, GPIO.LOW)
