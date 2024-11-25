@@ -5,6 +5,7 @@ import socket
 import subprocess
 import os
 
+
 # Get the user identifier from the environment
 user = os.getenv('USER')  # For macOS/Linux, or use 'USERNAME' for Windows
 
@@ -19,6 +20,11 @@ else:
 
 # Initialize the model and audio stream
 model = Model(model_path)
+
+recognizer = KaldiRecognizer(model, 16000)
+IPAdd = "192.168.251.29"
+audio = pyaudio.PyAudio()
+
 stream = audio.open(
     format=pyaudio.paInt16,
     channels=1,
@@ -27,12 +33,6 @@ stream = audio.open(
     input=True,
     frames_per_buffer=4096
 )
-
-recognizer = KaldiRecognizer(model, 16000)
-IPAdd = "192.168.251.29"
-audio = pyaudio.PyAudio()
-
-
 
 stream.start_stream()
 
