@@ -41,7 +41,6 @@ if input == "go\n":
     
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
-    time.sleep(2)
 
 elif input == "back\n":
     GPIO.output(PIN1_A, GPIO.LOW)
@@ -70,11 +69,10 @@ elif input == "stop\n":
         
     GPIO.output(PIN1_B, GPIO.LOW)
     GPIO.output(PIN2_B, GPIO.LOW)
-
-pwm_a.ChangeDutyCycle(0)
-pwm_b.ChangeDutyCycle(0)
-pwm_a.stop()
-pwm_b.stop()
-GPIO.cleanup()
+    pwm_a.ChangeDutyCycle(0)
+    pwm_b.ChangeDutyCycle(0)
+    pwm_a.stop()
+    pwm_b.stop()
+    GPIO.cleanup()
 
 
