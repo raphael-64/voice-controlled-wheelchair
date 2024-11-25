@@ -1,1 +1,1 @@
-print('l')
+print("left")

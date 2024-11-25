@@ -32,11 +32,13 @@ pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 pwm_a.start(100)
 pwm_b.start(100)
 
+
+
 try:
     while(True):
-        user_input = input()
-        print("Input: " +user_input)
-        if user_input == 'g':    
+        input = open("output.txt").read()
+        print("Input:" + input)
+        if input == "go\n":    
             GPIO.output(PIN1_A, GPIO.HIGH)
             GPIO.output(PIN2_A, GPIO.LOW)
             
@@ -45,28 +47,28 @@ try:
             time.sleep(2)
             print("go")
 
-        elif user_input == 'b':
+        elif input == "back\n":
             GPIO.output(PIN1_A, GPIO.LOW)
             GPIO.output(PIN2_A, GPIO.HIGH)
             
             GPIO.output(PIN1_B, GPIO.LOW)
             GPIO.output(PIN2_B, GPIO.HIGH)
 
-        elif user_input == 'l': 
+        elif input == "left\n": 
             GPIO.output(PIN1_A, GPIO.LOW)
             GPIO.output(PIN2_A, GPIO.HIGH)
                 
             GPIO.output(PIN1_B, GPIO.HIGH)
             GPIO.output(PIN2_B, GPIO.LOW)
 
-        elif user_input == 'r':
+        elif input == "right\n":
             GPIO.output(PIN1_A, GPIO.HIGH)
             GPIO.output(PIN2_A, GPIO.LOW)
         
             GPIO.output(PIN1_B, GPIO.LOW)
             GPIO.output(PIN2_B, GPIO.HIGH)
 
-except user_input == 's':
+except input == "stop":
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.LOW)
         
