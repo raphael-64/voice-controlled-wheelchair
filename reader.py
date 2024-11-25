@@ -32,8 +32,6 @@ pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 pwm_a.start(100)
 pwm_b.start(100)
 
-
-
 try:
     while(True):
         input = open("output.txt").read()
@@ -44,7 +42,7 @@ try:
             
             GPIO.output(PIN1_B, GPIO.HIGH)
             GPIO.output(PIN2_B, GPIO.LOW)
-            time.sleep(2)
+
             print("go")
 
         elif input == "back\n":
@@ -67,15 +65,19 @@ try:
         
             GPIO.output(PIN1_B, GPIO.LOW)
             GPIO.output(PIN2_B, GPIO.HIGH)
-
-except input == "stop":
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.LOW)
+        elif input == "stop\n":
+            GPIO.output(PIN1_A, GPIO.LOW)
+            GPIO.output(PIN2_A, GPIO.LOW)
         
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.LOW)
-    pwm_a.ChangeDutyCycle(0)
-    pwm_b.ChangeDutyCycle(0)
-    pwm_a.stop()
-    pwm_b.stop()
+            GPIO.output(PIN1_B, GPIO.LOW)
+            GPIO.output(PIN2_B, GPIO.LOW)
+            pwm_a.ChangeDutyCycle(0)
+            pwm_b.ChangeDutyCycle(0)
+            pwm_a.stop()
+            pwm_b.stop()
+            GPIO.cleanup()   
+            break 
+
+except Exception as e:
+    print(f"An error occurred: {e}")
     GPIO.cleanup()
