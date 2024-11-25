@@ -18,8 +18,26 @@ SERVER_IP = ''  # Replace with Raspberry Pi's IP address
 SERVER_PORT = 1200
 
 # Message to send
-MESSAGE = 'go'
+current_state = "stop"
 
+def update_state(new_state):
+    global current_state
+    if new_state != current_state:
+        if new_state == "go":
+            os.system("python3 ./commands/go.py| nc "+IPAdd+" 1200")
+            print("go")
+        elif new_state == "back":
+            os.system("python3 ./commands/back.py | nc "+IPAdd+" 1200")
+            print("back")
+        elif new_state == "stop":
+            os.system("python3 ./commands/stop.py | nc "+IPAdd+" 1200")
+            print("stop")
+        elif new_state == "turn left":
+            os.system("python3 ./commands/left.py | nc "+IPAdd+" 1200")
+            print("left")
+        elif new_state == "turn right":
+            os.system("python3 ./commands/right.py| nc "+IPAdd+" 1200")
+            print("turn right")
 
 try:
     while True:
@@ -27,28 +45,18 @@ try:
         if recognizer.AcceptWaveform(data):
             result = recognizer.Result()
             text = eval(result)["text"]
-
             if "go" in text:
-                os.system("python3 ./commands/go.py| nc "+IPAdd+" 1200")
-                print("go")
+                update_state("go")
             elif "back" in text:
-                os.system("python3 ./commands/back.py | nc "+IPAdd+" 1200")
-                print("back")
+                update_state("back")
             elif "stop" in text:
-                os.system("python3 ./commands/stop.py | nc "+IPAdd+" 1200")
-                print("stop")
+                update_state("stop")
             elif "turn left" in text:
-                os.system("python3 ./commands/left.py | nc "+IPAdd+" 1200")
-                print("left")
+                update_state("left")
             elif "turn right" in text:
-                os.system("python3 ./commands/right.py| nc "+IPAdd+" 1200")
-                print("turn right")
-            elif "slow down" in text:
-                os.system("python3 ./commands/down.py | nc "+IPAdd+" 1200")
-                print("down")
-            elif "speed up" in text:
-                os.system("python3 ./commands/up.py| nc "+IPAdd+" 1200")
-                print("up")
+                update_state("turn right")
+
+
 except KeyboardInterrupt:
     print("\nProgram terminated by user")
 

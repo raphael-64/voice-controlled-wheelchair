@@ -33,7 +33,8 @@ pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 pwm_a.start(100)
 pwm_b.start(100)
 
-input = open("output.txt").read()
+with open("output.txt", "r") as f:
+    input = f.read().strip()
 print("Input:" + input + "n")
 
 if input == "go\n":
