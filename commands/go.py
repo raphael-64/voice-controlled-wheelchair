@@ -1,3 +1,3 @@
-print ("go")
+print ('g')
 
     

@@ -1,1 +1,1 @@
-print("right")
+print('r')

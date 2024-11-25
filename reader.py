@@ -36,7 +36,7 @@ try:
     while(True):
         user_input = input()
         print("Input: " +user_input)
-        if user_input == "go\n":    
+        if user_input == 'g':    
             GPIO.output(PIN1_A, GPIO.HIGH)
             GPIO.output(PIN2_A, GPIO.LOW)
             
@@ -45,28 +45,28 @@ try:
             time.sleep(2)
             print("go")
 
-        elif user_input == "back\n":
+        elif user_input == 'b':
             GPIO.output(PIN1_A, GPIO.LOW)
             GPIO.output(PIN2_A, GPIO.HIGH)
             
             GPIO.output(PIN1_B, GPIO.LOW)
             GPIO.output(PIN2_B, GPIO.HIGH)
 
-        elif user_input == "left\n": 
+        elif user_input == 'l': 
             GPIO.output(PIN1_A, GPIO.LOW)
             GPIO.output(PIN2_A, GPIO.HIGH)
                 
             GPIO.output(PIN1_B, GPIO.HIGH)
             GPIO.output(PIN2_B, GPIO.LOW)
 
-        elif user_input == "right\n":
+        elif user_input == 'r':
             GPIO.output(PIN1_A, GPIO.HIGH)
             GPIO.output(PIN2_A, GPIO.LOW)
         
             GPIO.output(PIN1_B, GPIO.LOW)
             GPIO.output(PIN2_B, GPIO.HIGH)
 
-except user_input == "stop":
+except user_input == 's':
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.LOW)
         
