@@ -44,6 +44,7 @@ if input == "go\n":
     
     GPIO.output(PIN1_B, GPIO.HIGH)
     GPIO.output(PIN2_B, GPIO.LOW)
+    time.sleep(2)
 
 elif input == "back\n":
     GPIO.output(PIN1_A, GPIO.LOW)
