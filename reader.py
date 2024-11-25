@@ -32,40 +32,41 @@ pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 pwm_a.start(100)
 pwm_b.start(100)
 
-input = open("output.txt").read()
-print("Input:" + input + "n")
+try:
+    while(True):
+        user_input = input()
+        print("Input: " +user_input)
+        if user_input == "go\n":    
+            GPIO.output(PIN1_A, GPIO.HIGH)
+            GPIO.output(PIN2_A, GPIO.LOW)
+            
+            GPIO.output(PIN1_B, GPIO.HIGH)
+            GPIO.output(PIN2_B, GPIO.LOW)
+            time.sleep(2)
+            print("go")
 
-if input == "go\n":    
-    GPIO.output(PIN1_A, GPIO.HIGH)
-    GPIO.output(PIN2_A, GPIO.LOW)
-    
-    GPIO.output(PIN1_B, GPIO.HIGH)
-    GPIO.output(PIN2_B, GPIO.LOW)
-    time.sleep(2)
-    print("go")
+        elif user_input == "back\n":
+            GPIO.output(PIN1_A, GPIO.LOW)
+            GPIO.output(PIN2_A, GPIO.HIGH)
+            
+            GPIO.output(PIN1_B, GPIO.LOW)
+            GPIO.output(PIN2_B, GPIO.HIGH)
 
-elif input == "back\n":
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.HIGH)
-    
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.HIGH)
+        elif user_input == "left\n": 
+            GPIO.output(PIN1_A, GPIO.LOW)
+            GPIO.output(PIN2_A, GPIO.HIGH)
+                
+            GPIO.output(PIN1_B, GPIO.HIGH)
+            GPIO.output(PIN2_B, GPIO.LOW)
 
-elif input == "left\n": 
-    GPIO.output(PIN1_A, GPIO.LOW)
-    GPIO.output(PIN2_A, GPIO.HIGH)
+        elif user_input == "right\n":
+            GPIO.output(PIN1_A, GPIO.HIGH)
+            GPIO.output(PIN2_A, GPIO.LOW)
         
-    GPIO.output(PIN1_B, GPIO.HIGH)
-    GPIO.output(PIN2_B, GPIO.LOW)
+            GPIO.output(PIN1_B, GPIO.LOW)
+            GPIO.output(PIN2_B, GPIO.HIGH)
 
-elif input == "right\n":
-    GPIO.output(PIN1_A, GPIO.HIGH)
-    GPIO.output(PIN2_A, GPIO.LOW)
-   
-    GPIO.output(PIN1_B, GPIO.LOW)
-    GPIO.output(PIN2_B, GPIO.HIGH)
-
-elif input == "stop\n":
+except user_input == "stop":
     GPIO.output(PIN1_A, GPIO.LOW)
     GPIO.output(PIN2_A, GPIO.LOW)
         
@@ -76,5 +77,3 @@ elif input == "stop\n":
     pwm_a.stop()
     pwm_b.stop()
     GPIO.cleanup()
-
-
