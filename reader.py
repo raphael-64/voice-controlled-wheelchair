@@ -29,11 +29,8 @@ GPIO.setup(ENA_B, GPIO.OUT)
 pwm_a = GPIO.PWM(ENA_A, 100)  # Motor A PWM
 pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 
-pwm_a.start(0)
-pwm_b.start(0)
-
-speed_a = 50  # Motor A speed
-speed_b = 50  # Motor B speed
+pwm_a.start(100)
+pwm_b.start(100)
 
 input = open("output.txt").read()
 print("Input:" + input + "n")
