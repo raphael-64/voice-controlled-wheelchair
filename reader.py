@@ -90,8 +90,20 @@ try:
             pwm_b.ChangeDutyCycle(0)
             pwm_a.stop()
             pwm_b.stop()
+        elif input =="destroy\n":
+            GPIO.output(PIN1_A, GPIO.LOW)
+            GPIO.output(PIN2_A, GPIO.LOW)
+                
+            GPIO.output(PIN1_B, GPIO.LOW)
+            GPIO.output(PIN2_B, GPIO.LOW)
+            pwm_a.ChangeDutyCycle(0)
+            pwm_b.ChangeDutyCycle(0)
+            pwm_a.stop()
+            pwm_b.stop()
+            GPIO.cleanup
+            break
             
 
-except Exception as e:
-    print(f"An error occurred: {e}")
+except KeyboardInterrupt:
+    print(f"An error occurred")
     GPIO.cleanup()
