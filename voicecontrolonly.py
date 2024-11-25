@@ -5,13 +5,19 @@ import socket
 import subprocess
 import os
 
-#model = Model("/Users/richardhuang/Documents/GitHub/se101project-voiceControlledWheelchair/vosk_env/vosk-model")  # Richard
-model = Model("/Users/raphael/Documents/GitHub/voice-controlled-wheelchair/vosk_env/vosk-model")  # Raphael
+model = Model("/Users/richardhuang/Documents/GitHub/se101project-voiceControlledWheelchair/vosk_env/vosk-model")  # Richard
+stream = audio.open(format=pyaudio.paInt16, channels=1, input_device_index=3, rate=16000, input=True, frames_per_buffer=4096) # Richard
+
+#model = Model("/Users/raphael/Documents/GitHub/voice-controlled-wheelchair/vosk_env/vosk-model")  # Raphael
+#stream = audio.open(format=pyaudio.paInt16, channels=1, input_device_index=0, rate=16000, input=True, frames_per_buffer=4096) # Raphael
+
 
 recognizer = KaldiRecognizer(model, 16000)
 IPAdd = "192.168.251.29"
 audio = pyaudio.PyAudio()
-stream = audio.open(format=pyaudio.paInt16, channels=1, input_device_index=0, rate=16000, input=True, frames_per_buffer=4096)
+
+
+
 stream.start_stream()
 
 
