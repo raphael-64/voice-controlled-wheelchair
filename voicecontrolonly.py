@@ -5,12 +5,28 @@ import socket
 import subprocess
 import os
 
-model = Model("/Users/richardhuang/Documents/GitHub/se101project-voiceControlledWheelchair/vosk_env/vosk-model")  # Richard
-stream = audio.open(format=pyaudio.paInt16, channels=1, input_device_index=3, rate=16000, input=True, frames_per_buffer=4096) # Richard
+# Get the user identifier from the environment
+user = os.getenv('USER')  # For macOS/Linux, or use 'USERNAME' for Windows
 
-#model = Model("/Users/raphael/Documents/GitHub/voice-controlled-wheelchair/vosk_env/vosk-model")  # Raphael
-#stream = audio.open(format=pyaudio.paInt16, channels=1, input_device_index=0, rate=16000, input=True, frames_per_buffer=4096) # Raphael
+if user == "richardhuang":
+    model_path = "/Users/richardhuang/Documents/GitHub/se101project-voiceControlledWheelchair/vosk_env/vosk-model"
+    input_device_index = 3
+elif user == "raphael":
+    model_path = "/Users/raphael/Documents/GitHub/voice-controlled-wheelchair/vosk_env/vosk-model"
+    input_device_index = 0
+else:
+    raise ValueError("Unrecognized user or system configuration.")
 
+# Initialize the model and audio stream
+model = Model(model_path)
+stream = audio.open(
+    format=pyaudio.paInt16,
+    channels=1,
+    input_device_index=input_device_index,
+    rate=16000,
+    input=True,
+    frames_per_buffer=4096
+)
 
 recognizer = KaldiRecognizer(model, 16000)
 IPAdd = "192.168.251.29"
