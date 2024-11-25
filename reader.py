@@ -27,46 +27,39 @@ pi.set_PWM_dutycycle(ENA_A, 255)  # Full speed
 pi.set_PWM_frequency(ENA_B, 100)  # 100 Hz frequency for Motor B
 pi.set_PWM_dutycycle(ENA_B, 255)  # Full speed
 
-try:
-    while(True):
-        input = open("output.txt").read()
-        print("Input:" + input)
-        if input == "go\n":    
-            pi.write(PIN1_A, 1)
-            pi.write(PIN2_A, 0)
-            pi.write(PIN1_B, 1)
-            pi.write(PIN2_B, 0)
+input = open("output.txt").read()
+print("Input:" + input)
+        
+if input == "go\n":    
+    pi.write(PIN1_A, 1)
+    pi.write(PIN2_A, 0)
+    pi.write(PIN1_B, 1)
+    pi.write(PIN2_B, 0)
+    print("g")
+elif input == "back\n":
+    pi.write(PIN1_A, 0)
+    pi.write(PIN2_A, 1)
+    pi.write(PIN1_B, 0)
+    pi.write(PIN2_B, 1)
 
-            print("go")
+elif input == "left\n": 
+    pi.write(PIN1_A, 0)
+    pi.write(PIN2_A, 1)
+    pi.write(PIN1_B, 1)
+    pi.write(PIN2_B, 0)
 
-        elif input == "back\n":
-            pi.write(PIN1_A, 0)
-            pi.write(PIN2_A, 1)
-            pi.write(PIN1_B, 0)
-            pi.write(PIN2_B, 1)
-
-        elif input == "left\n": 
-            pi.write(PIN1_A, 0)
-            pi.write(PIN2_A, 1)
-            pi.write(PIN1_B, 1)
-            pi.write(PIN2_B, 0)
-
-        elif input == "right\n":
-            pi.write(PIN1_A, 1)
-            pi.write(PIN2_A, 0)
-            pi.write(PIN1_B, 0)
-            pi.write(PIN2_B, 1)
-        elif input == "stop\n":
-            pi.write(PIN1_A, 0)
-            pi.write(PIN2_A, 0)
-            pi.write(PIN1_B, 0)
-            pi.write(PIN2_B, 0)
-            pi.set_PWM_dutycycle(ENA_A, 0)  # Stop Motor A
-            pi.set_PWM_dutycycle(ENA_B, 0)  # Stop Motor B 
-            pi.set_PWM_dutycycle(ENA_A, 0)
-            pi.set_PWM_dutycycle(ENA_B, 0)
-            pi.stop()  # Disconnect from pigpio daemon
-            break
-
-except Exception as e:
-    print(f"An error occurred: {e}")
+elif input == "right\n":
+    pi.write(PIN1_A, 1)
+    pi.write(PIN2_A, 0)
+    pi.write(PIN1_B, 0)
+    pi.write(PIN2_B, 1)
+elif input == "stop\n":
+    pi.write(PIN1_A, 0)
+    pi.write(PIN2_A, 0)
+    pi.write(PIN1_B, 0)
+    pi.write(PIN2_B, 0)
+    pi.set_PWM_dutycycle(ENA_A, 0)  # Stop Motor A
+    pi.set_PWM_dutycycle(ENA_B, 0)  # Stop Motor B 
+    pi.set_PWM_dutycycle(ENA_A, 0)
+    pi.set_PWM_dutycycle(ENA_B, 0)
+    pi.stop()  # Disconnect from pigpio daemon
