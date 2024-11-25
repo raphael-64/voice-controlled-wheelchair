@@ -1,7 +1,7 @@
-import pigpio
+import os
+import RPi.GPIO as GPIO
 import time
 
-pi = pigpio.pi()
 # Left
 PIN1_A = 29 #In1 A
 PIN2_A = 31 #in2 A
@@ -12,54 +12,69 @@ PIN1_B = 40   # IN3 for Motor B
 PIN2_B = 38   # IN4 for Motor B
 ENA_B = 32   # PWM for Motor B
 
+GPIO.setmode(GPIO.BOARD)  # Use Broadcom pin-numbering scheme
 
 # Setup Motor A pins
-pi.set_mode(PIN1_A, pigpio.OUTPUT)
-pi.set_mode(PIN2_A, pigpio.OUTPUT)
-pi.set_mode(ENA_A, pigpio.OUTPUT)
-pi.set_mode(PIN1_B, pigpio.OUTPUT)
-pi.set_mode(PIN2_B, pigpio.OUTPUT)
-pi.set_mode(ENA_B, pigpio.OUTPUT)
+GPIO.setup(PIN1_A, GPIO.OUT)
+GPIO.setup(PIN2_A, GPIO.OUT)
+GPIO.setup(ENA_A, GPIO.OUT)
+
+# Setup Motor B pins
+GPIO.setup(PIN1_B, GPIO.OUT)
+GPIO.setup(PIN2_B, GPIO.OUT)
+GPIO.setup(ENA_B, GPIO.OUT)
 
 
-pi.set_PWM_frequency(ENA_A, 100)  # 100 Hz frequency for Motor A
-pi.set_PWM_dutycycle(ENA_A, 255)  # Full speed
-pi.set_PWM_frequency(ENA_B, 100)  # 100 Hz frequency for Motor B
-pi.set_PWM_dutycycle(ENA_B, 255)  # Full speed
+# Initialize PWM on ENA and ENB pins at 100Hz
+pwm_a = GPIO.PWM(ENA_A, 100)  # Motor A PWM
+pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
+
+pwm_a.start(100)
+pwm_b.start(100)
 
 input = open("output.txt").read()
 print("Input:" + input)
-        
+
 if input == "go\n":    
-    pi.write(PIN1_A, 1)
-    pi.write(PIN2_A, 0)
-    pi.write(PIN1_B, 1)
-    pi.write(PIN2_B, 0)
-    print("g")
+    GPIO.output(PIN1_A, GPIO.HIGH)
+    GPIO.output(PIN2_A, GPIO.LOW)
+    
+    GPIO.output(PIN1_B, GPIO.HIGH)
+    GPIO.output(PIN2_B, GPIO.LOW)
+    time.sleep(2)
+    print("go")
+
 elif input == "back\n":
-    pi.write(PIN1_A, 0)
-    pi.write(PIN2_A, 1)
-    pi.write(PIN1_B, 0)
-    pi.write(PIN2_B, 1)
+    GPIO.output(PIN1_A, GPIO.LOW)
+    GPIO.output(PIN2_A, GPIO.HIGH)
+    
+    GPIO.output(PIN1_B, GPIO.LOW)
+    GPIO.output(PIN2_B, GPIO.HIGH)
 
 elif input == "left\n": 
-    pi.write(PIN1_A, 0)
-    pi.write(PIN2_A, 1)
-    pi.write(PIN1_B, 1)
-    pi.write(PIN2_B, 0)
+    GPIO.output(PIN1_A, GPIO.LOW)
+    GPIO.output(PIN2_A, GPIO.HIGH)
+        
+    GPIO.output(PIN1_B, GPIO.HIGH)
+    GPIO.output(PIN2_B, GPIO.LOW)
 
 elif input == "right\n":
-    pi.write(PIN1_A, 1)
-    pi.write(PIN2_A, 0)
-    pi.write(PIN1_B, 0)
-    pi.write(PIN2_B, 1)
+    GPIO.output(PIN1_A, GPIO.HIGH)
+    GPIO.output(PIN2_A, GPIO.LOW)
+   
+    GPIO.output(PIN1_B, GPIO.LOW)
+    GPIO.output(PIN2_B, GPIO.HIGH)
+
 elif input == "stop\n":
-    pi.write(PIN1_A, 0)
-    pi.write(PIN2_A, 0)
-    pi.write(PIN1_B, 0)
-    pi.write(PIN2_B, 0)
-    pi.set_PWM_dutycycle(ENA_A, 0)  # Stop Motor A
-    pi.set_PWM_dutycycle(ENA_B, 0)  # Stop Motor B 
-    pi.set_PWM_dutycycle(ENA_A, 0)
-    pi.set_PWM_dutycycle(ENA_B, 0)
-    pi.stop()  # Disconnect from pigpio daemon
+    GPIO.output(PIN1_A, GPIO.LOW)
+    GPIO.output(PIN2_A, GPIO.LOW)
+        
+    GPIO.output(PIN1_B, GPIO.LOW)
+    GPIO.output(PIN2_B, GPIO.LOW)
+    pwm_a.ChangeDutyCycle(0)
+    pwm_b.ChangeDutyCycle(0)
+    pwm_a.stop()
+    pwm_b.stop()
+    GPIO.cleanup()
+
+
