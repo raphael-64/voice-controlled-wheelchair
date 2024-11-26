@@ -37,7 +37,7 @@ try:
     while(True):
         input = open("output.txt").read()
         print("Input:" + input)
-        if input == "go\n":   
+        if input == "left\n":   
             pwm_a.start(100)
             pwm_b.start(100)
             GPIO.output(PIN1_A, GPIO.HIGH)
@@ -46,9 +46,9 @@ try:
             GPIO.output(PIN1_B, GPIO.HIGH)
             GPIO.output(PIN2_B, GPIO.LOW)
             time.sleep(2)
-            print("go")
+            
 
-        elif input == "back\n":
+        elif input == "right\n":
             pwm_a.start(100)
             pwm_b.start(100)
 
@@ -58,7 +58,7 @@ try:
             GPIO.output(PIN1_B, GPIO.LOW)
             GPIO.output(PIN2_B, GPIO.HIGH)
 
-        elif input == "left\n": 
+        elif input == "go\n": 
             pwm_a.start(100)
             pwm_b.start(100)
 
@@ -69,7 +69,7 @@ try:
             GPIO.output(PIN2_B, GPIO.LOW)
             time.sleep(2)
 
-        elif input == "right\n":
+        elif input == "back\n":
             pwm_a.start(100)
             pwm_b.start(100)
 
@@ -101,6 +101,7 @@ try:
             pwm_a.stop()
             pwm_b.stop()
             GPIO.cleanup
+            
             break
             
 
