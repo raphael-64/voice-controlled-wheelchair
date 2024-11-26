@@ -10,7 +10,7 @@ import os
 user = os.getenv('USER')  # For macOS/Linux, or use 'USERNAME' for Windows
 
 if user == "richardhuang":
-    model_path = "/Users/richardhuang/Documents/GitHub/se101project-voiceControlledWheelchair/vosk_env/vosk-model"
+    model_path = "/Users/richardhuang/Documents/GitHub/voice-controlled-wheelchair/vosk_env/vosk-model"
     input_device_index = 3
 elif user == "raphael":
     model_path = "/Users/raphael/Documents/GitHub/voice-controlled-wheelchair/vosk_env/vosk-model"
@@ -66,13 +66,10 @@ try:
                 print("left")
             elif "turn right" in text:
                 os.system("python3 ./commands/right.py| nc "+IPAdd+" 1200")
-                print("turn right")
-            elif "slow down" in text:
-                os.system("python3 ./commands/down.py | nc "+IPAdd+" 1200")
-                print("down")
-            elif "speed up" in text:
-                os.system("python3 ./commands/up.py| nc "+IPAdd+" 1200")
-                print("up")
+                print("right")
+            elif "destroy" in text:
+                os.system("python3 ./commands/destroy.py | nc "+IPAdd+" 1200")
+                print("destroy")
 except KeyboardInterrupt:
     print("\nProgram terminated by user")
 
