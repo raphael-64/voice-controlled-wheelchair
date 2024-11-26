@@ -58,7 +58,7 @@ try:
             GPIO.output(PIN1_B, GPIO.LOW)
             GPIO.output(PIN2_B, GPIO.HIGH)
 
-        elif input == "go\n": 
+        elif input == "back\n": 
             pwm_a.start(100)
             pwm_b.start(100)
 
@@ -69,7 +69,7 @@ try:
             GPIO.output(PIN2_B, GPIO.LOW)
             time.sleep(2)
 
-        elif input == "back\n":
+        elif input == "go\n":
             pwm_a.start(100)
             pwm_b.start(100)
 
@@ -86,10 +86,7 @@ try:
                 
             GPIO.output(PIN1_B, GPIO.LOW)
             GPIO.output(PIN2_B, GPIO.LOW)
-            pwm_a.ChangeDutyCycle(0)
-            pwm_b.ChangeDutyCycle(0)
-            pwm_a.stop()
-            pwm_b.stop()
+            
         elif input =="destroy\n":
             GPIO.output(PIN1_A, GPIO.LOW)
             GPIO.output(PIN2_A, GPIO.LOW)
