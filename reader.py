@@ -29,8 +29,8 @@ GPIO.setup(ENA_B, GPIO.OUT)
 pwm_a = GPIO.PWM(ENA_A, 100)  # Motor A PWM
 pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
 
-pwm_a.start(100)
-pwm_b.start(100)
+pwm_a.start(50)
+pwm_b.start(50)
 
 
 try:
@@ -43,7 +43,6 @@ try:
             
             GPIO.output(PIN1_B, GPIO.HIGH)
             GPIO.output(PIN2_B, GPIO.LOW)
-            time.sleep(2)
             
 
         elif input == "right\n":
