@@ -5,6 +5,8 @@ import subprocess
 TOUCH_SENSOR_PIN = 11
 toggle_variable = 0
 
+GPIO.setmode(GPIO.BOARD)  # Use Broadcom pin-numbering scheme
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(TOUCH_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
@@ -12,7 +14,7 @@ GPIO.setup(TOUCH_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 try:
     while True:
-        if GPIO.input(TOUCH_SENSOR_PIN) == GPIO.HIGH:  
+        if GPIO.input(TOUCH_SENSOR_PIN) == GPIO.LOW:  
             toggle_variable = 1 - toggle_variable
             if toggle_variable == 0:
                 print("NOT RUNNING")
