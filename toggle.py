@@ -11,14 +11,14 @@ GPIO.setup(TOUCH_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 try:
     while True:
         if GPIO.input(TOUCH_SENSOR_PIN) == GPIO.HIGH:  
-            print("HELLO")
+            # print("HELLO")
             # toggle_variable = 1 - toggle_variable
-            # if toggle_variable == 0:
-            #     print("NOT RUNNING")
-            #     toggle_variable = 1
-            # else: 
-            #     print("RUNNING")
-            #     toggle_variable = 0
+            if toggle_variable == 0:
+                print("NOT RUNNING")
+                toggle_variable = 1
+            else: 
+                print("RUNNING")
+                toggle_variable = 0
 
             time.sleep(0.5)  
 except KeyboardInterrupt:
