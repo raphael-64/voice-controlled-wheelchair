@@ -10,7 +10,7 @@ GPIO.setup(TOUCH_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 try:
     while True:
-        if GPIO.input(TOUCH_SENSOR_PIN) == GPIO.LOW:  
+        if GPIO.input(TOUCH_SENSOR_PIN) == GPIO.HIGH:  
             print("HELLO")
             # toggle_variable = 1 - toggle_variable
             # if toggle_variable == 0:
