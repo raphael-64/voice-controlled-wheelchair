@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import subprocess
 
 TOUCH_SENSOR_PIN = 11
 toggle_variable = 0
@@ -11,9 +12,15 @@ GPIO.setup(TOUCH_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 try:
     while True:
-        if GPIO.input(TOUCH_SENSOR_PIN) == GPIO.LOW:  
+        if GPIO.input(TOUCH_SENSOR_PIN) == GPIO.HIGH:  
             toggle_variable = 1 - toggle_variable
-            #print(f"Variable is now: {toggle_variable}")
+            if toggle_variable == 0:
+                print("NOT RUNNING")
+                toggle_variable = 1
+            else: 
+                print("RUNNING")
+                toggle_variable = 0
+
             time.sleep(0.5)  
 except KeyboardInterrupt:
     print("Exiting...")
