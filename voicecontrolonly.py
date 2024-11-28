@@ -22,7 +22,7 @@ else:
 model = Model(model_path)
 
 recognizer = KaldiRecognizer(model, 16000)
-IPAdd = "192.168.251.29"
+IP = "192.168.251.29"
 audio = pyaudio.PyAudio()
 
 stream = audio.open(
@@ -36,15 +36,6 @@ stream = audio.open(
 
 stream.start_stream()
 
-
-# Define server address and port
-SERVER_IP = '172.20.10.2'  # Replace with Raspberry Pi's IP address
-SERVER_PORT = 65432
-
-# Message to send
-MESSAGE = 'go'
-
-
 try:
     while True:
         data = stream.read(4096)
@@ -53,23 +44,21 @@ try:
             text = eval(result)["text"]
 
             if "go" in text:
-                os.system("python3 ./commands/go.py| nc "+IPAdd+" 1200")
+                os.system("python3 ./commands/go.py| nc "+IP+" 1200")
                 print("go")
             elif "back" in text:
-                os.system("python3 ./commands/back.py | nc "+IPAdd+" 1200")
+                os.system("python3 ./commands/back.py | nc "+IP+" 1200")
                 print("back")
             elif "stop" in text:
-                os.system("python3 ./commands/stop.py | nc "+IPAdd+" 1200")
+                os.system("python3 ./commands/stop.py | nc "+IP+" 1200")
                 print("stop")
             elif "turn left" in text:
-                os.system("python3 ./commands/left.py | nc "+IPAdd+" 1200")
+                os.system("python3 ./commands/left.py | nc "+IP+" 1200")
                 print("left")
             elif "turn right" in text:
-                os.system("python3 ./commands/right.py| nc "+IPAdd+" 1200")
+                os.system("python3 ./commands/right.py| nc "+IP+" 1200")
                 print("right")
-            elif "destroy" in text:
-                os.system("python3 ./commands/destroy.py | nc "+IPAdd+" 1200")
-                print("destroy")
+
 except KeyboardInterrupt:
     print("\nProgram terminated by user")
 
