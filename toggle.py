@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-TOUCH_SENSOR_PIN = 3
+TOUCH_SENSOR_PIN = 11
 toggle_variable = 0
 
 GPIO.setmode(GPIO.BCM)
