@@ -6,8 +6,6 @@ TOUCH_SENSOR_PIN = 11
 toggle_variable = 0
 
 GPIO.setmode(GPIO.BOARD)  # Use Broadcom pin-numbering scheme
-
-GPIO.setmode(GPIO.BCM)
 GPIO.setup(TOUCH_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 #print("Press the touch sensor to toggle the variable.")
