@@ -24,12 +24,11 @@ try:
                 toggle_variable = 1
             else: 
                 print("TERMINATING...")
-                time.sleep(0.5)
                 bash_process.terminate()
                 python_process.terminate()
                 toggle_variable = 0
 
-            time.sleep(0.5)  
+            time.sleep(0.1)  
 except KeyboardInterrupt:
     print("Exiting...")
 finally:
