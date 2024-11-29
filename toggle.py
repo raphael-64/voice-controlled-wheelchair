@@ -9,7 +9,7 @@ toggle_variable = 0
 
 GPIO.setmode(GPIO.BOARD)  # Use Broadcom pin-numbering scheme
 GPIO.setup(TOUCH_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
+GPIO.setup(LED, GPIO.OUT)
 
 
 try:
