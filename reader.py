@@ -92,7 +92,7 @@ try:
             
             break
         
-        time.sleep(0.1)
+        time.sleep(0.5)
 
 except KeyboardInterrupt:
     print(f"An error occurred")

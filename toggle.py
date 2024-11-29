@@ -8,8 +8,7 @@ toggle_variable = 0
 GPIO.setmode(GPIO.BOARD)  # Use Broadcom pin-numbering scheme
 GPIO.setup(TOUCH_SENSOR_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-bash_process = None
-python_process = None
+
 
 try:
     while True:
@@ -24,11 +23,12 @@ try:
                 toggle_variable = 1
             else: 
                 print("TERMINATING...")
+                time.sleep(0.5)
                 bash_process.terminate()
                 python_process.terminate()
                 toggle_variable = 0
 
-            time.sleep(0.1)  
+            time.sleep(0.5)  
 except KeyboardInterrupt:
     print("Exiting...")
 finally:
