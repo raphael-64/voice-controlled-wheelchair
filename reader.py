@@ -91,8 +91,6 @@ try:
             GPIO.cleanup
             
             break
-        
-        time.sleep(0.5)
 
 except KeyboardInterrupt:
     print(f"An error occurred")

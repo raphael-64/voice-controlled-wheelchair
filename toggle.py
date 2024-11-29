@@ -20,6 +20,11 @@ try:
             if toggle_variable == 0:
                 print("INITIATING...")
                 time.sleep(0.5)
+
+                file = open("output.txt", "w")  
+                file.write("stop\n")
+                file.close()  
+
                 bash_process = subprocess.Popen(['bash', 'listener.sh'])
                 python_process = subprocess.Popen(['python3', 'reader.py'])
                 GPIO.output(LED, GPIO.HIGH)
@@ -27,6 +32,11 @@ try:
             else: 
                 print("TERMINATING...")
                 time.sleep(0.5)
+
+                file = open("output.txt", "w")  
+                file.write("stop\n")
+                file.close() 
+
                 bash_process.terminate()
                 python_process.terminate()
                 GPIO.output(LED, GPIO.LOW)
