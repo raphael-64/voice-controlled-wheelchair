@@ -25,22 +25,12 @@ try:
             else: 
                 print("TERMINATING...")
                 time.sleep(0.5)
-                if bash_process:
-                    bash_process.terminate()
-                    bash_process.wait()
-                if python_process:
-                    python_process.terminate()
-                    python_process.wait()
+                bash_process.terminate()
+                python_process.terminate()
                 toggle_variable = 0
 
             time.sleep(0.5)  
 except KeyboardInterrupt:
     print("Exiting...")
 finally:
-    if bash_process:
-        bash_process.terminate()
-        bash_process.wait()
-    if python_process:
-        python_process.terminate()
-        python_process.wait()
     GPIO.cleanup()
