@@ -22,7 +22,7 @@ else:
 model = Model(model_path)
 
 recognizer = KaldiRecognizer(model, 16000)
-IP = "192.168.251.29"
+IP = "192.168.40.29"
 audio = pyaudio.PyAudio()
 
 stream = audio.open(
