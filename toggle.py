@@ -3,6 +3,8 @@ import time
 import subprocess
 
 TOUCH_SENSOR_PIN = 11
+LED = 13
+
 toggle_variable = 0
 
 GPIO.setmode(GPIO.BOARD)  # Use Broadcom pin-numbering scheme
@@ -20,12 +22,14 @@ try:
                 time.sleep(0.5)
                 bash_process = subprocess.Popen(['bash', 'listener.sh'])
                 python_process = subprocess.Popen(['python3', 'reader.py'])
+                GPIO.output(LED, GPIO.HIGH)
                 toggle_variable = 1
             else: 
                 print("TERMINATING...")
                 time.sleep(0.5)
                 bash_process.terminate()
                 python_process.terminate()
+                GPIO.output(LED, GPIO.LOW)
                 toggle_variable = 0
 
             time.sleep(0.5)  
