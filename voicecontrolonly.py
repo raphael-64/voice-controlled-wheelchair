@@ -5,16 +5,16 @@ import socket
 import subprocess
 import os
 
-model = Model("/Users/richardhuang/Documents/GitHub/se101project-voiceControlledWheelchair/vosk_env/vosk-model")  #just my laptop, add the right path 
+model = Model("/Users/raphael/Documents/GitHub/voice-controlled-wheelchair/vosk-model")   #just my laptop, add the right path 
 recognizer = KaldiRecognizer(model, 16000)
-IPAdd = "192.168.124.29"
+IPAdd = "192.168.137.38"
 audio = pyaudio.PyAudio()
-stream = audio.open(format=pyaudio.paInt16, channels=1, input_device_index=3, rate=16000, input=True, frames_per_buffer=4096)
+stream = audio.open(format=pyaudio.paInt16, channels=1, input_device_index=0, rate=16000, input=True, frames_per_buffer=4096)
 stream.start_stream()
 
 
 # Define server address and port
-SERVER_IP = '172.20.10.2'  # Replace with Raspberry Pi's IP address
+SERVER_IP = '192.168.137.38'  # Replace with Raspberry Pi's IP address
 SERVER_PORT = 65432
 
 # Message to send

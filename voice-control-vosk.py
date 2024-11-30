@@ -3,7 +3,7 @@ import pyaudio
 import time
 import os
 
-model = Model("/Users/raphael/Documents/Coding/SE101/voice-controlled-wheelchair/vosk-model")  #just my laptop, add the right path 
+model = Model("/Users/raphael/Documents/GitHub/voice-controlled-wheelchair/vosk-model")  #just my laptop, add the right path 
 recognizer = KaldiRecognizer(model, 16000)
 
 audio = pyaudio.PyAudio()
