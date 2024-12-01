@@ -2,7 +2,6 @@ from vosk import Model, KaldiRecognizer
 import pyaudio
 import socket
 import threading
-import subprocess
 import os
 import matplotlib.pyplot as plt
 import numpy as np
@@ -18,14 +17,38 @@ stream.start_stream()
 LIDAR_IP = '192.168.137.38'  # Replace with Raspberry Pi's IP
 LIDAR_PORT = 65433
 
-# Visualization setup
-plt.ion()
-fig, ax = plt.subplots()
-sc = ax.scatter([], [])
-ax.set_xlim(-10, 10)  # Adjust as needed
-ax.set_ylim(-10, 10)
+# LiDAR visualization logic
+def visualize_lidar():
+    plt.ion()
+    fig, ax = plt.subplots()
+    sc = ax.scatter([], [])
+    ax.set_xlim(-10, 10)
+    ax.set_ylim(-10, 10)
 
-# Command handling function
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
+            print(f"Connecting to LiDAR server at {LIDAR_IP}:{LIDAR_PORT}...")
+            client.connect((LIDAR_IP, LIDAR_PORT))
+            print(f"Connected to LiDAR server at {LIDAR_IP}:{LIDAR_PORT}")
+
+            while True:
+                data = client.recv(1024).decode('utf-8').strip()
+                if data:
+                    print(f"LiDAR Data: {data}")
+                    points = [tuple(map(float, p.split(','))) for p in data.split(';')]
+                    x = [p[1] * np.cos(np.radians(p[0])) for p in points]
+                    y = [p[1] * np.sin(np.radians(p[0])) for p in points]
+                    sc.set_offsets(np.c_[x, y])
+                    plt.draw()
+                    plt.pause(0.01)
+    except ConnectionRefusedError:
+        print(f"Error: Unable to connect to {LIDAR_IP}:{LIDAR_PORT}. Is the server running?")
+    except Exception as e:
+        print(f"Unexpected error in LiDAR visualization: {e}")
+    finally:
+        print("LiDAR visualization stopped.")
+
+# Voice command handling
 def handle_voice_commands():
     try:
         while True:
@@ -33,31 +56,24 @@ def handle_voice_commands():
             if recognizer.AcceptWaveform(data):
                 result = recognizer.Result()
                 text = eval(result)["text"]
+                print(f"Voice Command: {text}")
 
                 if "go" in text:
                     os.system(f"echo go | nc {LIDAR_IP} 1200")
-                    print("go")
                 elif "back" in text:
                     os.system(f"echo back | nc {LIDAR_IP} 1200")
-                    print("back")
                 elif "stop" in text:
                     os.system(f"echo stop | nc {LIDAR_IP} 1200")
-                    print("stop")
                 elif "turn left" in text:
                     os.system(f"echo turn left | nc {LIDAR_IP} 1200")
-                    print("turn left")
                 elif "turn right" in text:
                     os.system(f"echo turn right | nc {LIDAR_IP} 1200")
-                    print("turn right")
                 elif "slow down" in text:
                     os.system(f"echo slow down | nc {LIDAR_IP} 1200")
-                    print("slow down")
                 elif "speed up" in text:
                     os.system(f"echo speed up | nc {LIDAR_IP} 1200")
-                    print("speed up")
                 elif "destroy" in text:
                     os.system(f"echo destroy | nc {LIDAR_IP} 1200")
-                    print("destroy")
     except KeyboardInterrupt:
         print("Voice command handling stopped.")
     finally:
@@ -65,37 +81,14 @@ def handle_voice_commands():
         stream.close()
         audio.terminate()
 
-# LiDAR data visualization function
-def visualize_lidar():
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client:
-        client.connect((LIDAR_IP, LIDAR_PORT))
-        print(f"Connected to LiDAR data at {LIDAR_IP}:{LIDAR_PORT}")
-
-        try:
-            while True:
-                data = client.recv(1024).decode('utf-8').strip()
-                if data:
-                    print(f"LiDAR Data: {data}")
-                    # Example: Parse "angle,distance" format to x, y
-                    points = [tuple(map(float, p.split(','))) for p in data.split(';')]
-                    x = [p[1] * np.cos(np.radians(p[0])) for p in points]
-                    y = [p[1] * np.sin(np.radians(p[0])) for p in points]
-                    sc.set_offsets(np.c_[x, y])
-                    plt.draw()
-                    plt.pause(0.01)
-        except KeyboardInterrupt:
-            print("LiDAR visualization stopped.")
-
-# Run both voice commands and LiDAR visualization in parallel
 if __name__ == "__main__":
     try:
-        voice_thread = threading.Thread(target=handle_voice_commands)
-        lidar_thread = threading.Thread(target=visualize_lidar)
-
+        # Start the voice commands in a separate thread
+        voice_thread = threading.Thread(target=handle_voice_commands, daemon=True)
         voice_thread.start()
-        lidar_thread.start()
 
-        voice_thread.join()
-        lidar_thread.join()
+        # Run the visualization in the main thread
+        visualize_lidar()
+
     except KeyboardInterrupt:
-        print("Program terminated.")
+        print("\nProgram terminated.")
