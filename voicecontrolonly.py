@@ -11,7 +11,7 @@ user = os.getenv('USER')  # For macOS/Linux, or use 'USERNAME' for Windows
 
 if user == "richardhuang":
     model_path = "/Users/richardhuang/Documents/GitHub/voice-controlled-wheelchair/vosk_env/vosk-model"
-    input_device_index = 3
+    input_device_index = 1
 elif user == "raphael":
     model_path = "/Users/raphael/Documents/GitHub/voice-controlled-wheelchair/vosk_env/vosk-model"
     input_device_index = 0
