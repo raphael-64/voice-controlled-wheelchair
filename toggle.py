@@ -27,7 +27,7 @@ GPIO.setup(PIN1_B, GPIO.OUT)
 GPIO.setup(PIN2_B, GPIO.OUT)
 GPIO.setup(ENA_B, GPIO.OUT)
 
-
+#
 # Initialize PWM on ENA and ENB pins at 100Hz
 pwm_a = GPIO.PWM(ENA_A, 100)  # Motor A PWM
 pwm_b = GPIO.PWM(ENA_B, 100)  # Motor B PWM
