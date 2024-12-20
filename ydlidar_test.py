@@ -1,3 +1,6 @@
+# This script uses the YDLIDAR SDK (https://github.com/YDLIDAR/YDLidar-SDK)
+# Licensed under the MIT License
+
 import os
 import ydlidar
 import time
