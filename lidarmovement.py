@@ -1,3 +1,6 @@
+# This script uses the YDLIDAR SDK (https://github.com/YDLIDAR/YDLidar-SDK)
+# Licensed under the MIT License
+
 import RPi.GPIO as GPIO
 import time
 from YDLidar import CYdLidar
