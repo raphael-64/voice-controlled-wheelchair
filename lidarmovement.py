@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-import random
+from YDLidar import CYdLidar
 
 # Motor Pins Setup
 PIN1_A = 29  # In1 A
@@ -65,28 +65,48 @@ def stop_motors():
     GPIO.output(PIN2_B, GPIO.LOW)
     print("Stopping")
 
-# Simulated LiDAR data generation
-def simulate_lidar_data():
-    """
-    Generate a pseudo-random set of distances in a 180-degree arc.
-    Returns a dictionary with angles as keys and distances as values.
-    """
-    lidar_data = {}
-    for angle in range(-90, 91, 10):  # -90° to 90° in 10° steps
-        lidar_data[angle] = random.randint(20, 100)  # Random distance between 20 and 100 cm
-    return lidar_data
+# Initialize YDLIDAR
+def init_lidar():
+    lidar = CYdLidar()
+    lidar.setlidaropt(CYdLidar.LidarPropSerialPort, "/dev/ttyUSB0")
+    lidar.setlidaropt(CYdLidar.LidarPropSerialBaudrate, 128000)
+    lidar.setlidaropt(CYdLidar.LidarPropLidarType, 0)
+    lidar.setlidaropt(CYdLidar.LidarPropDeviceType, 0)
+    lidar.setlidaropt(CYdLidar.LidarPropSampleRate, 5)
+    lidar.setlidaropt(CYdLidar.LidarPropScanFrequency, 10)
+    lidar.setlidaropt(CYdLidar.LidarPropSingleChannel, True)
+    if lidar.initialize():
+        print("YDLIDAR initialized.")
+        return lidar
+    else:
+        print("Failed to initialize YDLIDAR.")
+        return None
+
+def get_lidar_data(lidar):
+    scan = lidar.doProcessSimple(scan=None)
+    if scan is not None:
+        return {point.angle: point.range for point in scan.points}
+    else:
+        print("Failed to get lidar data.")
+        return {}
 
 try:
+    lidar = init_lidar()
+    if not lidar:
+        raise Exception("LiDAR initialization failed")
+
     while True:
-        # Simulate LiDAR data
-        lidar_data = simulate_lidar_data()
-        print(f"Simulated LiDAR Data: {lidar_data}")
+        # Get LiDAR data
+        lidar_data = get_lidar_data(lidar)
+        if not lidar_data:
+            continue
+
+        # Filter data
+        front_distance = min([dist for angle, dist in lidar_data.items() if -10 <= angle <= 10], default=1000)
+        left_distance = min([dist for angle, dist in lidar_data.items() if -90 <= angle < -30], default=1000)
+        right_distance = min([dist for angle, dist in lidar_data.items() if 30 < angle <= 90], default=1000)
 
         # Decision-making based on LiDAR data
-        front_distance = lidar_data[0]  # Distance directly ahead
-        left_distance = min(lidar_data[angle] for angle in range(-90, -30, 10))  # Check left angles
-        right_distance = min(lidar_data[angle] for angle in range(30, 91, 10))   # Check right angles
-
         if front_distance > 40:  # No obstacle ahead
             move_forward()
             time.sleep(2)
@@ -94,29 +114,13 @@ try:
             stop_motors()
             time.sleep(1)
 
-            if left_distance > right_distance:
-                print("Obstacle ahead! Turning slightly left.")
-                for _ in range(3):  # Perform intermediate left turns
-                    turn_left_intermediate()
-                    time.sleep(0.5)
-                    move_forward()
-                    time.sleep(0.5)
-            else:
-                print("Obstacle ahead! Turning slightly right.")
-                for _ in range(3):  # Perform intermediate right turns
-                    turn_right_intermediate()
-                    time.sleep(0.5)
-                    move_forward()
-                    time.sleep(0.5)
-
-            stop_motors()
-            print("Reevaluating path...")
-            time.sleep(1)
-
 except KeyboardInterrupt:
-    print("Simulation interrupted by user.")
+    print("Program interrupted by user.")
 
 finally:
+    if lidar:
+        lidar.turnOff()
+        lidar.disconnecting()
     pwm_a.stop()
     pwm_b.stop()
     GPIO.cleanup()
