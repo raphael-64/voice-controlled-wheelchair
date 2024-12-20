@@ -1,3 +1,7 @@
+# This script uses the Vosk speech recognition library.
+# Vosk is an open-source toolkit licensed under the Apache License 2.0.
+# For more information, visit: https://alphacephei.com/vosk/
+
 from vosk import Model, KaldiRecognizer
 import pyaudio
 import time
