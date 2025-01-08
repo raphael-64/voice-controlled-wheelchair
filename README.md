@@ -2,7 +2,7 @@
 
 ![Voice-Controlled Wheelchair](img/voice-controlled-wheelchair.png)
 
-**Code for a voice controlled wheelchair with autonomous hazard detection**
+**Code for a voice-controlled wheelchair with autonomous hazard detection**
 Using machine learning models for voice recognition and visual detection
 
 
