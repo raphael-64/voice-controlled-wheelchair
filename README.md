@@ -6,17 +6,17 @@
 Using machine learning models for voice recognition and visual detection
 
 
-## Acknowledgments
+## 👍Acknowledgments 
 
 
-**VOSK**
+**🔊VOSK**
 
 This project uses the Vosk speech recognition model.
 Vosk is licensed under the Apache License 2.0.
 For more information, visit: https://alphacephei.com/vosk/
 
 
-**LiDAR**
+**🚨LiDAR**
 
 ![Voice-Controlled Wheelchair](img/lidar_mapping.jpeg)
 
